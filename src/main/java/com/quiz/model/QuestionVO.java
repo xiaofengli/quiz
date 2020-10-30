@@ -1,10 +1,9 @@
-package com.quitz.model;
+package com.quiz.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import lombok.Data;
-
 
 @Data
 public class QuestionVO {

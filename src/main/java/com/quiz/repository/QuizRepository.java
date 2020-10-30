@@ -1,19 +1,17 @@
-package com.quitz.repository;
+package com.quiz.repository;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import com.quitz.model.QuestionVO;
+import com.quiz.model.QuestionVO;
 
 //public interface QuitzRepository extends JpaRepository<QuestionVO, Integer> {
 
 @Repository
-public class QuitzRepository {
+public class QuizRepository {
 	
 	  @Autowired
 	    private JdbcTemplate jdbcTemplate;

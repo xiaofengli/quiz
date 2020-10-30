@@ -1,4 +1,4 @@
-package com.quitz.app;
+package com.quiz.app;
 import java.util.TimeZone;
 
 import org.springframework.boot.SpringApplication;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import springfox.documentation.annotations.ApiIgnore;
 
 @SpringBootApplication
-@ComponentScan({"com.quitz"})
-@EnableJpaRepositories("com.quitz.repository")
-@EntityScan("com.quitz.model")
+@ComponentScan({"com.quiz"})
+@EnableJpaRepositories("com.quiz.repository")
+@EntityScan("com.quiz.model")
 public class FinAnalyzerApplication {
 	
 	public static void main(String[] args) {
@@ -23,7 +23,7 @@ public class FinAnalyzerApplication {
 		SpringApplication.run(FinAnalyzerApplication.class, args);
 	}
 	
-	/*
+	
     @Controller
     @ApiIgnore
     static class SwaggerWelcome {
@@ -31,5 +31,5 @@ public class FinAnalyzerApplication {
             public String redirectToUi() {
                     return "redirect:/swagger-ui.html";
             }
-    }*/
+    }
 }

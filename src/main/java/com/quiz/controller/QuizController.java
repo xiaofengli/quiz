@@ -1,4 +1,4 @@
-package com.quitz.controller;
+package com.quiz.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,21 +11,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import com.quitz.repository.QuitzRepository;
-
+import com.quiz.repository.QuizRepository;
 import io.swagger.annotations.ApiOperation;
 
 @Controller
-public class QuitzController {
-
-
+public class QuizController {
 	@Autowired
-	QuitzRepository quitzRepo;
+	QuizRepository quizRepo;
 
-	@GetMapping("/quitz/question/{id}")
+	@GetMapping("/quiz/question/{id}")
 	@ApiOperation(value = "get question info")
-	public ResponseEntity<?> accountsDataETL(@PathVariable int id) {
+	public ResponseEntity<?> getQestions(@PathVariable int id) {
 		//List<Map<String, Object>> account = quitzRepo.getQuestionById(id);
 		List<Map<String, Object>> account = new ArrayList<>();
 		HashMap<String, Object> response = new HashMap<>();
