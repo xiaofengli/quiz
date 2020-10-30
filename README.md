@@ -1,102 +1,84 @@
-# FinReportAnalyzer
+English Quiz System
 
-* Cash account file is downloaded from portal.
-* IRA file is exported from trade pro. 
-
-# gain_loss_closed_position table
-
-```
-drop table gain_loss_closed_position;
-use fidelity;
-create table gain_loss_closed_position (
-id INT AUTO_INCREMENT PRIMARY KEY,
-account VARCHAR(255) NOT NULL,
-symbol VARCHAR(255) NOT NULL,
-short_term DOUBLE NOT NULL,
-long_term DOUBLE NOT NULL,
-security_description VARCHAR(255) NOT NULL,
-quantity INT NOT NULL,
-date_acquired DATE,
-date_sold DATE,
-proceeds DOUBLE NOT NULL,
-cost_basis DOUBLE NOT NULL,
-sold_price_per_stock DOUBLE NOT NULL,
-bought_price_per_stock DOUBLE NOT NULL,
-wash_sale boolean DEFAULT false NOT NULL,
-hash_code VARCHAR(255) NOT NULL,
-init_processing_date DATE NOT NULL,
-last_updated DATE NOT NULL
-);
-```
-
-It ingests the data from Realized_Gain_Loss_Account_xxxxx.csv file.
+# SQL for a generic question system
 
 
-
-## Queries
-
-### Check how much each stock make (gain/loss)
-```
-SELECT symbol, SUM(short_term) FROM fidelity.gain_loss_closed_position
-group by symbol;
-```
-
-### Check total gain or loss
-```
-select sum(short_term) from fidelity.gain_loss_closed_position
-where account = '';
-```
-
-### Check perticular stock gain and loss
-
-* Check how many transactions
- 
-```
-SELECT count(*) FROM fidelity.gain_loss_closed_position
-where symbol like '%BAC%'
-```
-
-This shows `19`.
+## create tables
 
 ```
-SELECT sum(short_term) FROM fidelity.gain_loss_closed_position
-where symbol like '%BAC%'
+create database quizdb;
+use  quizdb;
+drop table question_meta;
+CREATE TABLE `question_meta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `date_created` timestamp NOT NULL,
+  `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+drop table `question`;
+CREATE TABLE `question` (
+  `id` int(11) NOT NULL auto_increment,
+  `question_meta_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `date_created` timestamp NOT NULL,
+  `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+drop table `question_answer`;
+
+CREATE TABLE `question_answer` (
+`id` int(11) NOT NULL auto_increment,
+  `question_meta_id` int(11) NOT NULL,
+  `answer` varchar(255) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `date_created` timestamp NOT NULL,
+  `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 ```
 
-Shows `-237.249`
-
-To see all the transactions about this stock and analyze the issue, check the folloiwng, 
+# Create dummy data
 
 ```
-SELECT * FROM fidelity.gain_loss_closed_position
-where symbol like '%BAC%';
-```
 
-### Daily gain or loss
+insert into question_meta (`id`, `title`, `description`, `category`, `date_created`, `last_updated`) 
+values (null, 'Question 1', 'select the right letter', 'single_selection',now(), now());
 
-Since we have a proceeds date, so we can sum the amounts in the gains for certain day, for example for the current day.
+insert into question (`id`,`question_meta_id`, `title`, `content`, `date_created`, `last_updated`) 
+values (null, 1, 'A', 'you select A',now(), now());
 
-```
-SELECT sum(short_term) FROM fidelity.gain_loss_closed_position
-where account = 'Account_X85490199' 
-and date_sold = current_date()
-order by date_sold desc
-```
+insert into question (`id`,`question_meta_id`, `title`, `content`, `date_created`, `last_updated`) 
+values (null, 1, 'B', 'you select B',now(), now());
 
-### Check loss events
+insert into question (`id`, `question_meta_id`, `title`, `content`, `date_created`, `last_updated`) 
+values (null, 1, 'C', 'you select C',now(), now());
 
-Two queries
+insert into question_answer (`id`, `question_meta_id`, `answer`,`comment`,  `date_created`, `last_updated`) 
+values (null, 1, 'C', 'this is the right ansewr ',now(), now());
 
 ```
-select * from fidelity.gain_loss_closed_position
-where short_term < 0
-order by short_term asc
-```
 
-```
-select * from fidelity.gain_loss_closed_position
-where short_term < 0
-order by symbol
-```
+# Backend and API Design
 
-# watch_list
+* This query will provide and generate all the questions,
+
+SELECT * FROM quizdb.question_meta;
+
+* The first query will get the options to render for question 1.
+
+SELECT question_meta.id, question.title FROM quizdb.question_meta, question
+where question_meta.id = question.question_meta_id and
+question_meta.id = 1;
+
+* The following API will provide the answer
+
+SELECT question_meta.id as question_id ,question_answer.answer  as question_answer FROM quizdb.question_meta, question_answer
+where question_meta.id = question_answer.question_meta_id and
+question_meta.id = 1;
