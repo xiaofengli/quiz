@@ -1,0 +1,9 @@
+td a {
+    display:block;
+    width:100%;
+}
+
+
+td a:link, a:visited { /* or a[href] */
+  /* Enabled link styles */
+}
