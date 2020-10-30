@@ -1,13 +1,15 @@
 package com.quiz.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import lombok.Data;
 
 @Data
 public class QuestionVO {
-
-	String questionMetaId;
-	String questionTitle;
+	@SuppressWarnings("unused")
+	private long id;
+	
+	@SuppressWarnings("unused")
+	private String question_body;
+	
+	@SuppressWarnings("unused")
+	private String question_selection;
 }
