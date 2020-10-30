@@ -11,5 +11,5 @@ public class QuestionVO {
 	private String question_body;
 	
 	@SuppressWarnings("unused")
-	private String question_selection;
+	private String selection_title;
 }

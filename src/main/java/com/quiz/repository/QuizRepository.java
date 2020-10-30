@@ -18,8 +18,10 @@ public class QuizRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	final String baseQuery = "SELECT question_meta.id AS id, question_meta.title AS question_body, question.title AS question_selection FROM quizdb.question_meta, question "
-			+ "WHERE question_meta.id = question.question_meta_id AND question_meta.id = ";
+	final String baseQuery = "SELECT question_meta.id AS id, question_meta.title AS question_body, question.title AS selection_title "
+			+ "FROM quizdb.question_meta, question "
+			+ "WHERE question_meta.id = question.question_meta_id "
+			+ "AND question_meta.id = ";
 	public List<QuestionVO> getQuestionSelectionsById(int id) {
 		String finalQuery = baseQuery + id;
 		System.out.println("query is: " + finalQuery);
