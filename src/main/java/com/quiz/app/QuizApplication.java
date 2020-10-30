@@ -15,12 +15,12 @@ import springfox.documentation.annotations.ApiIgnore;
 @ComponentScan({"com.quiz"})
 @EnableJpaRepositories("com.quiz.repository")
 @EntityScan("com.quiz.model")
-public class FinAnalyzerApplication {
+public class QuizApplication {
 	
 	public static void main(String[] args) {
 		// Fix timezone issue which is one day off from database after serialization
 		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-		SpringApplication.run(FinAnalyzerApplication.class, args);
+		SpringApplication.run(QuizApplication.class, args);
 	}
 	
 	
