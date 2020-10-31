@@ -8,7 +8,7 @@ function hello(id) {
 	//call aswer
 	
 	$.get({
-        url: "http://192.168.0.3:9080/quiz/question/1/answer"
+        url: "http://192.168.0.3:80/quiz/question/1/answer"
     }).then(function(data) {
     	console.log(data);
     	if (data.question_id.toString(10) === question_id && choice == data.question_answer) {
@@ -22,7 +22,7 @@ function hello(id) {
 
 function getQuestions() {
 	$.get({
-        url: "http://192.168.0.3:9080/quiz/question/1/selections"
+        url: "http://192.168.0.3:80/quiz/question/1/selections"
     }).then(function(data) {
 
     	var header = "<table class='table table-condensed table-hover'>";
