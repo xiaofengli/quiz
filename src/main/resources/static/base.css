@@ -3,7 +3,19 @@ td a {
     width:100%;
 }
 
-
 td a:link, a:visited { /* or a[href] */
   /* Enabled link styles */
 }
+
+#yes {
+	visibility: visible;
+	display: block;
+	background-image: url('yes.png');
+}
+
+#no {
+	visibility: visible;
+	display: block;
+	background-image: url('no.jpg');
+}
+

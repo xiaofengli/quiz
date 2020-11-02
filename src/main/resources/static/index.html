@@ -12,6 +12,7 @@
 	crossorigin="anonymous">
 
 <link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="overlay.css">
 <link rel="stylesheet" href="tab.css">
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -25,7 +26,7 @@
 	crossorigin="anonymous"></script>
 
 <script src="https://d3js.org/d3.v4.js"></script>
-<script src="quitz.js"></script>
+<script src="quiz.js"></script>
 <script src="tab.js"></script>
 </head>
 
@@ -34,12 +35,23 @@
 	<div class="tab ">
 
 		<button class="tablinks" onclick="openTabById(event, 'transactions')">Quiz</button>
-	
+	<button class="tablinks" onclick="openTabById(event, 'alphabets_game')">Alphabet</button>
 	</div>
 
 	<div id="transactions" class="tabcontent bg-info">
 		<div id="gain_records" class="container-fluid"></div>
 	</div>
- 
+	
+	<div id="alphabets_game" class="tabcontent bg-info">
+		<div id="alphabets" class="container-fluid"></div>
+	</div>
+	
+	<div id='yes'> </div>
+	
+	<div id='no'> </div>
+	
+ 	<div id="overlay" onclick="overlay_off()">
+    <div id="text"></div>
+</div>
 </body>
 </html>
