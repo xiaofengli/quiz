@@ -4,3 +4,5 @@
 .springBeans
 .classpath
 .factoryPath
+.factorypath
+.DS_Store

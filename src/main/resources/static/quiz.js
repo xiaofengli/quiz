@@ -89,12 +89,12 @@ function overlay_on(flag) {
 	if (flag == "yes") {
 		  document.getElementById("text").style.backgroundImage = "url('images/yes.png')";	
 	} else {
-		document.getElementById("text").style.backgroundImage = "url('images/no.jpg')";	
+		document.getElementById("text").style.backgroundImage = "url('images/no1.png')";	
 	}
 	document.getElementById("overlay").style.display = "block";
 	document.getElementById("text").style.backgroundRepeat = "no-repeat";
 	document.getElementById("text").style.backgroundPosition = "center";
-	document.getElementById("text").style.backgroundSize="30px 10px";
+	document.getElementById("text").style.backgroundSize="300px 300px";
 }
 
 function overlay_off() {
